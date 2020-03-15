@@ -119,6 +119,10 @@ class App(arcade.Window):
             if self.player.center_x > self.left_view + 50:
                 self.player.change_x -= 3
 
+        if symbol == arcade.key.SPACE:
+            self.shake_screen = True
+            self.shake_count = 0 
+
     def on_key_release(self, symbol, modifiers):
         if symbol == arcade.key.UP:
             self.player.change_y = 0
@@ -133,9 +137,7 @@ class App(arcade.Window):
         elif symbol == arcade.key.RIGHT:
             self.player.change_x = 0
 
-        if symbol == arcade.key.SPACE:
-            self.shake_screen = True
-            self.shake_count = 0 
+        
 
 
 def main():
