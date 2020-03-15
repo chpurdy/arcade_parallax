@@ -61,9 +61,7 @@ class App(arcade.Window):
         self.clouds_front.draw()
 
     def on_update(self, dt):
-        if not self.shake_screen:
-            self.set_viewport(self.left_view, self.left_view + self.width, self.bottom_view, self.bottom_view + self.height)
-        else:
+        if self.shake_screen:
             shake = [(self.shake_intensity,0),
                      (self.shake_intensity,self.shake_intensity),
                      (0,self.shake_intensity)]
@@ -75,7 +73,11 @@ class App(arcade.Window):
             self.shake_count += 1
             if self.shake_count == 3:
                 self.shake_screen = False
-                self.shake_count = 0
+                self.shake_count = 0 
+
+            
+        else:
+            self.set_viewport(self.left_view, self.left_view + self.width, self.bottom_view, self.bottom_view + self.height)
 
 
         self.left_view += self.scroll_speed
