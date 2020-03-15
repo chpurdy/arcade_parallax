@@ -46,6 +46,7 @@ class App(arcade.Window):
         self.bg_mid2_x = self.width
         self.shake_screen = False
         self.shake_count = 0
+        self.shake_intensity = 5
         
 
 
@@ -53,7 +54,7 @@ class App(arcade.Window):
 
     def on_draw(self):
         arcade.start_render()
-        arcade.draw_lrwh_rectangle_textured(self.left_view, self.bottom_view,self.width, self.height,self.bg_back)
+        arcade.draw_lrwh_rectangle_textured(self.left_view, self.bottom_view,self.width+self.shake_intensity, self.height+self.shake_intensity,self.bg_back)
         self.draw_mid_bg()
         self.clouds_back.draw()
         self.player.draw()
@@ -63,7 +64,10 @@ class App(arcade.Window):
         if not self.shake_screen:
             self.set_viewport(self.left_view, self.left_view + self.width, self.bottom_view, self.bottom_view + self.height)
         else:
-            shake = [(5,0),(5,5),(0,5)]
+            shake = [(self.shake_intensity,0),
+                     (self.shake_intensity,self.shake_intensity),
+                     (0,self.shake_intensity)]
+
             self.set_viewport(self.left_view + shake[self.shake_count][0], 
                               self.left_view + self.width + shake[self.shake_count][0], 
                               self.bottom_view + shake[self.shake_count][1], 
